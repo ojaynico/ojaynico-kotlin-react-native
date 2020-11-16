@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <bytecodeTargetLevel target="14" />
+    <bytecodeTargetLevel target="14">
+      <module name="ojaynico-kotlin-react-native.commonMain" target="1.8" />
+      <module name="ojaynico-kotlin-react-native.commonTest" target="1.8" />
+      <module name="ojaynico-kotlin-react-native.jvmMain" target="1.8" />
+      <module name="ojaynico-kotlin-react-native.jvmTest" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>

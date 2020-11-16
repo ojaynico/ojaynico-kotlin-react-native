@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="ojaynico-kotlin-react-native-1.0">
+    <output-path>$PROJECT_DIR$/build/libs</output-path>
+    <root id="archive" name="ojaynico-kotlin-react-native-1.0.jar">
+      <element id="module-output" name="ojaynico-kotlin-react-native.main" />
+    </root>
+  </artifact>
+</component>
