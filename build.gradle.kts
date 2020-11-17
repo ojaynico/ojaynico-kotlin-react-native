@@ -1,11 +1,11 @@
 plugins {
     kotlin("js") version "1.4.10"
-    `maven-publish`
+    id("maven-publish")
     id("com.jfrog.bintray") version "1.8.4"
 }
 
 group = "ojaynico.kotlin.react.native"
-version = "1.0"
+version = "1.0.6"
 
 val artifactName = project.name
 val artifactGroup = project.group.toString()
@@ -27,17 +27,47 @@ val pomDeveloperId = "ojaynico"
 val pomDeveloperName = "Nicodemus Ojwee"
 
 repositories {
-    maven { setUrl("https://dl.bintray.com/kotlin/kotlin-eap") }
     mavenCentral()
     jcenter()
+    maven { url = uri("https://dl.bintray.com/kotlin/kotlin-eap") }
+    maven { url = uri("https://dl.bintray.com/ojaynico/ojaynico-kotlin-react-native") }
     maven { url = uri("http://dl.bintray.com/kotlin/kotlin-js-wrappers") }
     maven { url = uri("https://dl.bintray.com/kotlin/kotlinx") }
+    mavenLocal()
 }
 
-/*val sourcesJar by tasks.creating(Jar::class) {
+kotlin {
+    js {
+        /*compilations.all {
+            kotlinOptions {
+                moduleKind = "umd"
+            }
+        }*/
+        /*browser {
+            testTask {
+                useKarma {
+                    useChromeHeadless()
+                }
+            }
+        }*/
+        nodejs {
+
+        }
+        useCommonJs()
+    }
+}
+
+dependencies {
+    implementation("org.jetbrains:kotlin-react:16.13.1-pre.120-kotlin-1.4.10")
+    implementation("org.jetbrains:kotlin-extensions:1.0.1-pre.120-kotlin-1.4.10")
+    implementation(npm("react", "16.13.1"))
+    implementation(npm("react-native", "0.63.3"))
+}
+
+val sourcesJar by tasks.registering(Jar::class) {
     archiveClassifier.set("sources")
-    from(sourceSets.getByName("main").allSource)
-}*/
+    from(kotlin.sourceSets.main.get().kotlin)
+}
 
 publishing {
     publications {
@@ -45,9 +75,9 @@ publishing {
             groupId = artifactGroup
             artifactId = artifactName
             version = artifactVersion
-            //from(components["java"])
+            from(components["kotlin"])
 
-            //artifact(sourcesJar)
+            artifact(sourcesJar)
 
             pom.withXml {
                 asNode().apply {
@@ -98,18 +128,5 @@ bintray {
             released = "2020-11-17"
             vcsTag = artifactVersion
         }
-    }
-}
-
-kotlin {
-    js {
-        nodejs()
-        useCommonJs()
-    }
-    dependencies {
-        implementation("org.jetbrains:kotlin-react:16.13.1-pre.120-kotlin-1.4.10")
-        implementation("org.jetbrains:kotlin-extensions:1.0.1-pre.120-kotlin-1.4.10")
-        implementation(npm("react", "16.13.1"))
-        implementation(npm("react-native", "0.63.3", generateExternals=true))
     }
 }

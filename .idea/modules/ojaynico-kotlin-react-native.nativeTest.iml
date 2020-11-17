@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module version="4">
+  <component name="FacetManager">
+    <facet type="kotlin-language" name="Kotlin">
+      <configuration version="3" platform="Native (macos_x64) " allPlatforms="Native []/Native [macos_x64]" useProjectSettings="false" isTestModule="true" externalProjectId="ojaynico-kotlin-react-native">
+        <dependsOnModuleNames>ojaynico-kotlin-react-native:commonTest</dependsOnModuleNames>
+        <sourceSets>
+          <sourceSet>ojaynico-kotlin-react-native.nativeMain</sourceSet>
+          <sourceSet>ojaynico-kotlin-react-native.commonMain</sourceSet>
+          <sourceSet>ojaynico-kotlin-react-native.commonTest</sourceSet>
+        </sourceSets>
+        <newMppModelJpsModuleKind>COMPILATION_AND_SOURCE_SET_HOLDER</newMppModelJpsModuleKind>
+        <externalSystemTestTasks>
+          <externalSystemTestTask>nativeTest|ojaynico-kotlin-react-native:nativeTest|native</externalSystemTestTask>
+        </externalSystemTestTasks>
+        <compilerSettings />
+        <compilerArguments>
+          <option name="languageVersion" value="1.4" />
+          <option name="apiVersion" value="1.4" />
+          <option name="pluginOptions">
+            <array />
+          </option>
+          <option name="pluginClasspaths">
+            <array />
+          </option>
+          <option name="multiPlatform" value="true" />
+          <option name="errors">
+            <ArgumentParseErrors />
+          </option>
+        </compilerArguments>
+      </configuration>
+    </facet>
+  </component>
+</module>

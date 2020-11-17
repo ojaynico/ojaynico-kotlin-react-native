@@ -34,8 +34,8 @@ fun RBuilder.animatedImage(handler: ImageProps.() -> Unit) = child(Animated.Imag
     attrs(handler)
 }
 
-fun RBuilder.imageBackground(handler: ImageBackgroundProps.() -> Unit) = child(ImageBackground::class) {
-    attrs(handler)
+fun RBuilder.imageBackground(handler: RElementBuilder<ImageBackgroundProps>.() -> Unit) = child(ImageBackground::class) {
+    handler()
 }
 
 fun RBuilder.textInput(handler: TextInputProps.() -> Unit) = child(TextInput::class) {
