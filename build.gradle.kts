@@ -38,18 +38,6 @@ repositories {
 
 kotlin {
     js {
-        /*compilations.all {
-            kotlinOptions {
-                moduleKind = "umd"
-            }
-        }*/
-        /*browser {
-            testTask {
-                useKarma {
-                    useChromeHeadless()
-                }
-            }
-        }*/
         nodejs {
 
         }
