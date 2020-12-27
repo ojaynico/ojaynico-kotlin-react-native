@@ -1,11 +1,11 @@
 plugins {
-    kotlin("js") version "1.4.10"
+    kotlin("js") version "1.4.21"
     id("maven-publish")
     id("com.jfrog.bintray") version "1.8.4"
 }
 
 group = "ojaynico.kotlin.react.native"
-version = "1.0.6"
+version = "1.0.7"
 
 val artifactName = project.name
 val artifactGroup = project.group.toString()
@@ -37,19 +37,17 @@ repositories {
 }
 
 kotlin {
-    js {
-        nodejs {
-
-        }
+    js(BOTH) {
+        nodejs {}
         useCommonJs()
     }
 }
 
 dependencies {
-    implementation("org.jetbrains:kotlin-react:16.13.1-pre.120-kotlin-1.4.10")
+    implementation("org.jetbrains:kotlin-react:17.0.0-pre.133-kotlin-1.4.21")
     implementation("org.jetbrains:kotlin-extensions:1.0.1-pre.120-kotlin-1.4.10")
-    implementation(npm("react", "16.13.1"))
-    implementation(npm("react-native", "0.63.3"))
+    implementation(npm("react", "17.0.0"))
+    implementation(npm("react-native", "0.63.4"))
 }
 
 val sourcesJar by tasks.registering(Jar::class) {
@@ -113,7 +111,7 @@ bintray {
         version.apply {
             name = artifactVersion
             desc = pomDesc
-            released = "2020-11-17"
+            released = "2020-12-27"
             vcsTag = artifactVersion
         }
     }

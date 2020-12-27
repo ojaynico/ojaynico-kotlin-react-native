@@ -6,11 +6,11 @@ Kotlin Wrappers for React Native Components and APIs
 
 Java Version : 14
 
-Kotlin Version : 1.4.10
+Kotlin Version : 1.4.21
 
-React Version : 16.13.1
+React Version : 17.0.0
 
-React Native Version : 0.63.3
+React Native Version : 0.63.4
 
 Available components: All react native components are available in this wrapper. Check them out using the URL below:
 
