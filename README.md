@@ -4,8 +4,6 @@
 
 Kotlin Wrappers for React Native Components and APIs
 
-**NOTE:** Wrapper is still under development and lacks a documentation.
-
 Java Version : 14
 
 Kotlin Version : 1.4.10
@@ -22,8 +20,6 @@ Available APIs: All react native APIs are available in this wrapper. Check them 
 
 https://reactnative.dev/docs/accessibilityinfo
 
-About 95% of the APIs and Components have been tested and are working. A detailed documentation on how to setup a project and multiple examples will be available soon.
-
 ## `How to use the wrapper?`
 
 In your react native application shared module (a kotlin gradle project), update your gradle file to include the following in the respective blocks.
@@ -39,7 +35,7 @@ dependencies {
 }
 ```
 
-### `Example of code snippet for a react native using the above wrapper`
+### `Example of code snippet for a react native app using the above wrapper`
 
 ```kotlin
 import ojaynico.kotlin.react.*
