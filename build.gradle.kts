@@ -45,7 +45,7 @@ kotlin {
 
 dependencies {
     implementation("org.jetbrains:kotlin-react:17.0.0-pre.133-kotlin-1.4.21")
-    implementation("org.jetbrains:kotlin-extensions:1.0.1-pre.120-kotlin-1.4.10")
+    implementation("org.jetbrains:kotlin-extensions:1.0.1-pre.133-kotlin-1.4.21")
     implementation(npm("react", "17.0.0"))
     implementation(npm("react-native", "0.63.4"))
 }

@@ -31,7 +31,7 @@ repositories {
 }
 
 dependencies {
-    implementation("ojaynico.kotlin.react.native:ojaynico-kotlin-react-native:1.0.6")
+    implementation("ojaynico.kotlin.react.native:ojaynico-kotlin-react-native:1.0.7")
 }
 ```
 
