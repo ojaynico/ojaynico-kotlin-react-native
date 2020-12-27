@@ -1,4 +1,7 @@
 # ojaynico-kotlin-react-native
+
+[ ![Download](https://api.bintray.com/packages/ojaynico/ojaynico-kotlin-react-native/ojaynico-kotlin-react-native/images/download.svg?version=1.0.6) ](https://bintray.com/ojaynico/ojaynico-kotlin-react-native/ojaynico-kotlin-react-native/1.0.6/link)
+
 Kotlin Wrappers for React Native Components and APIs
 
 **NOTE:** Wrapper is still under development and lacks a documentation.
