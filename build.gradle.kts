@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "ojaynico.kotlin.react.native"
-version = "1.0.7"
+version = "1.0.8"
 
 val artifactName = project.name
 val artifactGroup = project.group.toString()
@@ -111,7 +111,7 @@ bintray {
         version.apply {
             name = artifactVersion
             desc = pomDesc
-            released = "2020-12-27"
+            released = "2020-12-29"
             vcsTag = artifactVersion
         }
     }

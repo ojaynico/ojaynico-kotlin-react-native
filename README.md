@@ -1,6 +1,6 @@
 # ojaynico-kotlin-react-native
 
-[ ![Download](https://api.bintray.com/packages/ojaynico/ojaynico-kotlin-react-native/ojaynico-kotlin-react-native/images/download.svg?version=1.0.7) ](https://bintray.com/ojaynico/ojaynico-kotlin-react-native/ojaynico-kotlin-react-native/1.0.7/link)
+[ ![Download](https://api.bintray.com/packages/ojaynico/ojaynico-kotlin-react-native/ojaynico-kotlin-react-native/images/download.svg?version=1.0.8) ](https://bintray.com/ojaynico/ojaynico-kotlin-react-native/ojaynico-kotlin-react-native/1.0.8/link)
 
 Kotlin Wrappers for React Native Components and APIs
 
@@ -31,7 +31,7 @@ repositories {
 }
 
 dependencies {
-    implementation("ojaynico.kotlin.react.native:ojaynico-kotlin-react-native:1.0.7")
+    implementation("ojaynico.kotlin.react.native:ojaynico-kotlin-react-native:1.0.8")
 }
 ```
 

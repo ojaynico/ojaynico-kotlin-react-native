@@ -618,6 +618,7 @@ external class TouchableHighlight : Component<TouchableHighlightProps, RState> {
 
 external interface TouchableOpacityProps : RProps {
     var style: dynamic
+    var onPress: () -> Unit
     var activeOpacity: Number
     var tvParallaxProperties: dynamic
     var hasTVPreferredFocus: Boolean
