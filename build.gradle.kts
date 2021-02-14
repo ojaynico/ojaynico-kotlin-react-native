@@ -1,11 +1,12 @@
 plugins {
-    kotlin("js") version "1.4.21"
+    kotlin("js") version "1.4.30"
     id("maven-publish")
-    id("com.jfrog.bintray") version "1.8.4"
+    id("io.codearte.nexus-staging") version "0.22.0"
+    signing
 }
 
-group = "ojaynico.kotlin.react.native"
-version = "1.0.8"
+group = "com.github.ojaynico"
+version = "1.0.9"
 
 val artifactName = project.name
 val artifactGroup = project.group.toString()
@@ -25,15 +26,11 @@ val pomLicenseDist = "repo"
 
 val pomDeveloperId = "ojaynico"
 val pomDeveloperName = "Nicodemus Ojwee"
+val pomDeveloperEmail = "ojaynico@gmail.com"
 
 repositories {
     mavenCentral()
     jcenter()
-    maven { url = uri("https://dl.bintray.com/kotlin/kotlin-eap") }
-    maven { url = uri("https://dl.bintray.com/ojaynico/ojaynico-kotlin-react-native") }
-    maven { url = uri("http://dl.bintray.com/kotlin/kotlin-js-wrappers") }
-    maven { url = uri("https://dl.bintray.com/kotlin/kotlinx") }
-    mavenLocal()
 }
 
 kotlin {
@@ -44,9 +41,9 @@ kotlin {
 }
 
 dependencies {
-    implementation("org.jetbrains:kotlin-react:17.0.0-pre.133-kotlin-1.4.21")
-    implementation("org.jetbrains:kotlin-extensions:1.0.1-pre.133-kotlin-1.4.21")
-    implementation(npm("react", "17.0.0"))
+    implementation("org.jetbrains:kotlin-react:17.0.1-pre.144-kotlin-1.4.30")
+    implementation("org.jetbrains:kotlin-extensions:1.0.1-pre.144-kotlin-1.4.30")
+    implementation(npm("react", "17.0.1"))
     implementation(npm("react-native", "0.63.4"))
 }
 
@@ -56,6 +53,17 @@ val sourcesJar by tasks.registering(Jar::class) {
 }
 
 publishing {
+    repositories {
+        maven {
+            credentials {
+                val sonatypeUsername: String by project
+                val sonatypePassword: String by project
+                username = sonatypeUsername
+                password = sonatypePassword
+            }
+            url = uri("https://oss.sonatype.org/service/local/staging/deploy/maven2/")
+        }
+    }
     publications {
         create<MavenPublication>("ojaynico-kotlin-react-native") {
             groupId = artifactGroup
@@ -63,7 +71,7 @@ publishing {
             version = artifactVersion
             from(components["kotlin"])
 
-            artifact(sourcesJar)
+            artifact(sourcesJar.get())
 
             pom.withXml {
                 asNode().apply {
@@ -78,8 +86,11 @@ publishing {
                     appendNode("developers").appendNode("developer").apply {
                         appendNode("id", pomDeveloperId)
                         appendNode("name", pomDeveloperName)
+                        appendNode("email", pomDeveloperEmail)
                     }
                     appendNode("scm").apply {
+                        appendNode("connection", "scm:git:$pomScmUrl.git")
+                        appendNode("developerConnection", "scm:git:$pomScmUrl.git")
                         appendNode("url", pomScmUrl)
                     }
                 }
@@ -88,31 +99,16 @@ publishing {
     }
 }
 
-bintray {
-    user = project.findProperty("bintrayUser").toString()
-    key = project.findProperty("bintrayKey").toString()
-    publish = true
+nexusStaging {
+    packageGroup = project.group.toString()
 
-    setPublications("ojaynico-kotlin-react-native")
+    val sonatypeUsername: String by project
+    val sonatypePassword: String by project
+    username = sonatypeUsername
+    password = sonatypePassword
+}
 
-    pkg.apply {
-        repo = "ojaynico-kotlin-react-native"
-        name = artifactName
-        githubRepo = githubRepo
-        vcsUrl = pomScmUrl
-        description = "Kotlin wrapper for react native components and APIs"
-        setLabels("kotlin", "react", "react-native")
-        setLicenses("MIT")
-        desc = description
-        websiteUrl = pomUrl
-        issueTrackerUrl = pomIssueUrl
-        githubReleaseNotesFile = githubReadme
-
-        version.apply {
-            name = artifactVersion
-            desc = pomDesc
-            released = "2020-12-29"
-            vcsTag = artifactVersion
-        }
-    }
+signing {
+    sign(tasks["sourcesJar"])
+    sign(publishing.publications["ojaynico-kotlin-react-native"])
 }

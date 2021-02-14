@@ -1,14 +1,13 @@
 # ojaynico-kotlin-react-native
-
-[ ![Download](https://api.bintray.com/packages/ojaynico/ojaynico-kotlin-react-native/ojaynico-kotlin-react-native/images/download.svg?version=1.0.8) ](https://bintray.com/ojaynico/ojaynico-kotlin-react-native/ojaynico-kotlin-react-native/1.0.8/link)
+[Download](https://search.maven.org/artifact/com.github.ojaynico/ojaynico-kotlin-react-native/1.0.9/pom)
 
 Kotlin Wrappers for React Native Components and APIs
 
 Java Version : 14
 
-Kotlin Version : 1.4.21
+Kotlin Version : 1.4.30
 
-React Version : 17.0.0
+React Version : 17.0.1
 
 React Native Version : 0.63.4
 
@@ -26,12 +25,12 @@ In your react native application shared module (a kotlin gradle project), update
 
 ```kotlin
 repositories {
-    maven { url = uri("https://dl.bintray.com/ojaynico/ojaynico-kotlin-react-native") }
+    mavenCentral()
     jcenter()
 }
 
 dependencies {
-    implementation("ojaynico.kotlin.react.native:ojaynico-kotlin-react-native:1.0.8")
+    implementation("com.github.ojaynico:ojaynico-kotlin-react-native:1.0.9")
 }
 ```
 
