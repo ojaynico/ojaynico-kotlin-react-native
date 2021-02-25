@@ -3,9 +3,6 @@
 
 package ojaynico.kotlin.react.native
 
-import ojaynico.kotlin.react.ImageStyle
-import ojaynico.kotlin.react.TextStyle
-import ojaynico.kotlin.react.ViewStyle
 import react.*
 
 // View Component
