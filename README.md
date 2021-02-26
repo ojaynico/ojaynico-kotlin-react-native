@@ -1,7 +1,7 @@
 # ojaynico-kotlin-react-native
 [Download](https://search.maven.org/artifact/com.github.ojaynico/ojaynico-kotlin-react-native/1.0.9/pom)
 
-![https://kotl.in/jsirsupported](https://img.shields.io/badge/Kotlin%2FJS-IR%20supported-yellow)
+[![Kotlin JS IR supported](https://img.shields.io/badge/Kotlin%2FJS-IR%20supported-yellow)](https://kotl.in/jsirsupported)
 
 Kotlin Wrappers for React Native Components and APIs
 
