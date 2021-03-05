@@ -12,14 +12,14 @@ fun RBuilder.animatedView(handler: RElementBuilder<ViewProps>.() -> Unit) = chil
     handler()
 }
 
-fun RBuilder.text(text: String, handler: TextProps.() -> Unit) = child(Text::class) {
+fun RBuilder.text(text: String, handler: RElementBuilder<TextProps>.() -> Unit) = child(Text::class) {
     this.childList.add(text)
-    attrs(handler)
+    handler()
 }
 
-fun RBuilder.animatedText(text: String, handler: TextProps.() -> Unit) = child(Animated.Text::class) {
+fun RBuilder.animatedText(text: String, handler: RElementBuilder<TextProps>.() -> Unit) = child(Animated.Text::class) {
     this.childList.add(text)
-    attrs(handler)
+    handler()
 }
 
 fun RBuilder.button(handler: ButtonProps.() -> Unit) = child(Button::class) {
