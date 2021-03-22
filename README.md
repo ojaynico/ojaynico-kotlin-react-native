@@ -1,13 +1,12 @@
 # ojaynico-kotlin-react-native
-[Download](https://search.maven.org/artifact/com.github.ojaynico/ojaynico-kotlin-react-native/1.0.9/pom)
-
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.ojaynico/ojaynico-kotlin-react-native/badge.svg)](https://search.maven.org/artifact/com.github.ojaynico/ojaynico-kotlin-react-native/1.1.0/pom)
 [![Kotlin JS IR supported](https://img.shields.io/badge/Kotlin%2FJS-IR%20supported-yellow)](https://kotl.in/jsirsupported)
 
 Kotlin Wrappers for React Native Components and APIs
 
 Java Version : 14
 
-Kotlin Version : 1.4.30
+Kotlin Version : 1.4.31
 
 React Version : 17.0.1
 
@@ -38,7 +37,7 @@ repositories {
 }
 
 dependencies {
-    implementation("com.github.ojaynico:ojaynico-kotlin-react-native:1.0.9")
+    implementation("com.github.ojaynico:ojaynico-kotlin-react-native:1.1.0")
 }
 ```
 
