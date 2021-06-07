@@ -1,12 +1,12 @@
 plugins {
-    kotlin("js") version "1.5.0"
+    kotlin("js") version "1.5.10"
     id("maven-publish")
     id("io.codearte.nexus-staging") version "0.30.0"
     signing
 }
 
 group = "com.github.ojaynico"
-version = "1.1.2"
+version = "1.1.3"
 
 val artifactName = project.name
 val artifactGroup = project.group.toString()
@@ -31,7 +31,6 @@ val pomDeveloperEmail = "ojaynico@gmail.com"
 repositories {
     mavenCentral()
     jcenter()
-    maven(url = "https://maven.pkg.jetbrains.space/kotlin/p/kotlin/kotlin-js-wrappers")
 }
 
 kotlin {
@@ -42,8 +41,8 @@ kotlin {
 }
 
 dependencies {
-    implementation("org.jetbrains:kotlin-react:17.0.2-pre.156-kotlin-1.5.0")
-    implementation("org.jetbrains:kotlin-extensions:1.0.1-pre.156-kotlin-1.5.0")
+    implementation("org.jetbrains.kotlin-wrappers:kotlin-react:17.0.2-pre.207-kotlin-1.5.10")
+    implementation("org.jetbrains.kotlin-wrappers:kotlin-extensions:1.0.1-pre.207-kotlin-1.5.10")
     implementation(npm("react", "17.0.2"))
     implementation(npm("react-native", "0.64.0"))
 }
