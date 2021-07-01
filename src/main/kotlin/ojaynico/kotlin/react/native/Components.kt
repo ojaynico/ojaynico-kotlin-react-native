@@ -606,6 +606,7 @@ external interface TouchableHighlightProps : RProps {
     var nextFocusRight: Boolean
     var nextFocusUp: Boolean
     var testOnly_pressed: Boolean
+    var onPress: () -> Unit
 }
 
 external class TouchableHighlight : Component<TouchableHighlightProps, RState> {
