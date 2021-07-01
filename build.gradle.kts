@@ -1,12 +1,12 @@
 plugins {
-    kotlin("js") version "1.5.10"
+    kotlin("js") version "1.5.20"
     id("maven-publish")
     id("io.codearte.nexus-staging") version "0.30.0"
     signing
 }
 
 group = "com.github.ojaynico"
-version = "1.1.3"
+version = "1.1.4"
 
 val artifactName = project.name
 val artifactGroup = project.group.toString()
@@ -41,10 +41,10 @@ kotlin {
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlin-wrappers:kotlin-react:17.0.2-pre.207-kotlin-1.5.10")
-    implementation("org.jetbrains.kotlin-wrappers:kotlin-extensions:1.0.1-pre.207-kotlin-1.5.10")
+    implementation("org.jetbrains.kotlin-wrappers:kotlin-react:17.0.2-pre.213-kotlin-1.5.20")
+    implementation("org.jetbrains.kotlin-wrappers:kotlin-extensions:1.0.1-pre.213-kotlin-1.5.20")
     implementation(npm("react", "17.0.2"))
-    implementation(npm("react-native", "0.64.0"))
+    implementation(npm("react-native", "0.64.2"))
 }
 
 val sourcesJar by tasks.registering(Jar::class) {

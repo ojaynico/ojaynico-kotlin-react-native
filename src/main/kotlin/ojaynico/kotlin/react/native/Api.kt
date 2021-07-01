@@ -3,6 +3,7 @@
 
 package ojaynico.kotlin.react.native
 
+import ojaynico.kotlin.react.ComponentProvider
 import react.Component
 import react.RProps
 import react.RState
@@ -111,19 +112,19 @@ external object Appearance {
 }
 
 external object AppRegistry {
-    fun <T : Component<*, *>> registerComponent(name: String, createComponent: () -> JsClass<T>)
+    fun registerComponent(appKey: String, getComponentFunc: ComponentProvider): String
     fun setWrapperComponentProvider(componentProvider: () -> JsClass<dynamic>)
     fun enableArchitectureIndicator(enabled: Boolean)
     fun registerConfig(config: dynamic)
-    //fun registerComponent(appKey: String, componentProvider: () -> JsClass<dynamic>, section: Boolean = definedExternally)
+    fun registerComponent(appKey: String, getComponentFunc: ComponentProvider, section: Boolean)
     fun registerRunnable(appKey: String, run: () -> Unit)
-    fun registerSection(appKey: String, componentProvider: () -> JsClass<dynamic>)
+    fun registerSection(appKey: String, componentProvider: ComponentProvider)
     fun getAppKeys()
     fun getSectionKeys()
     fun getSections()
     fun getRunnable(appKey: String)
     fun getRegistry()
-    fun setComponentProviderInstrumentationHook(hook: (componentProvider: () -> JsClass<dynamic>, scopedPerformanceLogger: dynamic) -> Unit)
+    fun setComponentProviderInstrumentationHook(hook: (componentProvider: ComponentProvider, scopedPerformanceLogger: dynamic) -> Unit)
     fun runApplication(appKey: String, appParameters: dynamic)
     fun unmountApplicationComponentAtRootTag(rootTag: Number)
     fun registerHeadlessTask(taskKey: String, taskProvider: dynamic)
@@ -312,3 +313,4 @@ external object Settings {
     fun watchKeys(keys: dynamic, callback: () -> Unit): Number
 }
 
+external var Platform: dynamic = definedExternally

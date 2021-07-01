@@ -125,3 +125,5 @@ fun RBuilder.touchableNativeFeedback(handler: TouchableNativeFeedbackProps.() ->
 fun RBuilder.inputAccessoryView(handler: InputAccessoryViewProps.() -> Unit) = child(InputAccessoryView::class) {
     attrs(handler)
 }
+
+typealias ComponentProvider = () -> dynamic
