@@ -1,6 +1,6 @@
 # ojaynico-kotlin-react-native
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.ojaynico/ojaynico-kotlin-react-native/badge.svg)](https://search.maven.org/artifact/com.github.ojaynico/ojaynico-kotlin-react-native/1.1.4/pom)
-[![Kotlin](https://img.shields.io/badge/kotlin-1.5.20-blue.svg?logo=kotlin)](http://kotlinlang.org)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.ojaynico/ojaynico-kotlin-react-native/badge.svg)](https://search.maven.org/artifact/com.github.ojaynico/ojaynico-kotlin-react-native/1.1.5/pom)
+[![Kotlin](https://img.shields.io/badge/kotlin-1.5.30-blue.svg?logo=kotlin)](http://kotlinlang.org)
 [![npm version](https://img.shields.io/npm/v/react.svg?style=flat)](https://www.npmjs.com/package/react)
 [![npm version](https://img.shields.io/npm/v/react-native?color=brightgreen&label=npm%20package)](https://www.npmjs.com/package/react-native)
 [![Kotlin JS IR supported](https://img.shields.io/badge/Kotlin%2FJS-IR%20supported-yellow)](https://kotl.in/jsirsupported)
@@ -32,7 +32,7 @@ repositories {
 }
 
 dependencies {
-    implementation("com.github.ojaynico:ojaynico-kotlin-react-native:1.1.4")
+    implementation("com.github.ojaynico:ojaynico-kotlin-react-native:1.1.5")
 }
 ```
 
@@ -54,7 +54,7 @@ val styles = StyleSheet.create(object {
     }
 }
 
-class App : RComponent<RProps, RState>() {
+class App : RComponent<Props, State>() {
     override fun RBuilder.render() {
         scrollView {
             attrs.contentInsetAdjustmentBehavior = "automatic"

@@ -5,11 +5,12 @@ package ojaynico.kotlin.react.native
 
 import ojaynico.kotlin.react.ComponentProvider
 import react.Component
-import react.RProps
-import react.RState
+import react.Props
+import react.State
+import kotlin.js.Promise
 
 // Alert Component
-external class Alert: Component<RProps, RState> {
+external class Alert: Component<Props, State> {
     override fun render(): dynamic = definedExternally
 
     class Buttons(text: String, onPress: () -> Unit, style: String = definedExternally)
@@ -23,29 +24,29 @@ external class Alert: Component<RProps, RState> {
     }
 }
 
-external class Animated : Component<RProps, RState> {
+external class Animated : Component<Props, State> {
 
-    class View : Component<ViewProps, RState> {
+    class View : Component<ViewProps, State> {
         override fun render(): dynamic = definedExternally
     }
 
-    class Text : Component<TextProps, RState> {
+    class Text : Component<TextProps, State> {
         override fun render(): dynamic = definedExternally
     }
 
-    class Image : Component<ImageProps, RState> {
+    class Image : Component<ImageProps, State> {
         override fun render(): dynamic = definedExternally
     }
 
-    class ScrollView : Component<ScrollViewProps, RState> {
+    class ScrollView : Component<ScrollViewProps, State> {
         override fun render(): dynamic = definedExternally
     }
 
-    class FlatList : Component<FlatListProps, RState> {
+    class FlatList : Component<FlatListProps, State> {
         override fun render(): dynamic = definedExternally
     }
 
-    class SectionList : Component<SectionListProps, RState> {
+    class SectionList : Component<SectionListProps, State> {
         override fun render(): dynamic = definedExternally
     }
 
@@ -314,3 +315,18 @@ external object Settings {
 }
 
 external var Platform: dynamic = definedExternally
+
+external object AccessibilityInfo {
+    fun isBoldTextEnabled(): Promise<Boolean>
+    fun isGrayscaleEnabled(): Promise<Boolean>
+    fun isInvertColorsEnabled(): Promise<Boolean>
+    fun isReduceMotionEnabled(): Promise<Boolean>
+    fun isReduceTransparencyEnabled(): Promise<Boolean>
+    fun isScreenReaderEnabled(): Promise<Boolean>
+    fun setAccessibilityFocus(reactTag: Number)
+    fun sendAccessibilityEvent_unstable(handle: dynamic, eventType: dynamic)
+    fun announceForAccessibility(announcement: String)
+    fun getRecommendedTimeoutMillis(originalTimeout: Number): Promise<Number>
+    fun addEventListener(eventName: String, handler: (args: dynamic) -> Unit): dynamic
+    fun removeEventListener(eventName: String, handler: (args: dynamic) -> Unit)
+}

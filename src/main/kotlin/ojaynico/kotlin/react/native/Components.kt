@@ -6,7 +6,7 @@ package ojaynico.kotlin.react.native
 import react.*
 
 // View Component
-external interface ViewProps : RProps {
+external interface ViewProps : Props {
     var onStartShouldSetResponder: (dynamic) -> Boolean
     var accessible: Boolean
     var accessibilityLabel: String
@@ -52,12 +52,12 @@ external interface ViewProps : RProps {
     var focusable: Boolean
 }
 
-external class View : Component<ViewProps, RState> {
+external class View : Component<ViewProps, State> {
     override fun render(): dynamic = definedExternally
 }
 
 // Text Component
-external interface TextProps : RProps {
+external interface TextProps : Props {
     var accessibilityLabel: String
     var accessibilityHint: String
     var accessibilityRole: String
@@ -90,14 +90,16 @@ external interface TextProps : RProps {
     var suppressHighlighting: Boolean
     var testID: String
     var textBreakStrategy: String
+    var onPressIn: (event: dynamic) -> Unit
+    var onPressOut: (event: dynamic) -> Unit
 }
 
-external class Text : Component<TextProps, RState> {
+external class Text : Component<TextProps, State> {
     override fun render(): dynamic = definedExternally
 }
 
 // Button Component
-external interface ButtonProps : RProps {
+external interface ButtonProps : Props {
     var onPress: () -> Unit
     var title: String
     var accessibilityLabel: String
@@ -113,12 +115,12 @@ external interface ButtonProps : RProps {
     var touchSoundDisabled: Boolean
 }
 
-external class Button : Component<ButtonProps, RState> {
+external class Button : Component<ButtonProps, State> {
     override fun render(): dynamic = definedExternally
 }
 
 // Image Component
-external interface ImageProps : RProps {
+external interface ImageProps : Props {
     var style: dynamic
     var accessible: Boolean
     var accessibilityLabel: String
@@ -141,7 +143,7 @@ external interface ImageProps : RProps {
     var testID: String
 }
 
-external class Image : Component<ImageProps, RState> {
+external class Image : Component<ImageProps, State> {
     override fun render(): dynamic = definedExternally
 
     companion object {
@@ -154,7 +156,7 @@ external class Image : Component<ImageProps, RState> {
     }
 }
 
-external interface ImageBackgroundProps : ImageProps, RProps {
+external interface ImageBackgroundProps : ImageProps, Props {
     var imageStyle: dynamic
     var imageRef: dynamic
     override var style: dynamic
@@ -179,12 +181,12 @@ external interface ImageBackgroundProps : ImageProps, RProps {
     override var testID: String
 }
 
-external class ImageBackground : Component<ImageBackgroundProps, RState> {
+external class ImageBackground : Component<ImageBackgroundProps, State> {
     override fun render(): dynamic = definedExternally
 }
 
 // TextInput Component
-external interface TextInputProps : RProps {
+external interface TextInputProps : Props {
     var allowFontScaling: Boolean
     var autoCapitalize: String
     var autoCompleteType: String
@@ -243,7 +245,7 @@ external interface TextInputProps : RProps {
     var value: String
 }
 
-external class TextInput : Component<TextInputProps, RState> {
+external class TextInput : Component<TextInputProps, State> {
     override fun render(): dynamic = definedExternally
 
     companion object {
@@ -255,7 +257,7 @@ external class TextInput : Component<TextInputProps, RState> {
 }
 
 // Switch Component
-external interface SwitchProps : RProps {
+external interface SwitchProps : Props {
     var disabled: Boolean
     var ios_backgroundColor: String
     var onChange: () -> Unit
@@ -265,12 +267,12 @@ external interface SwitchProps : RProps {
     var value: Boolean
 }
 
-external class Switch : Component<SwitchProps, RState> {
+external class Switch : Component<SwitchProps, State> {
     override fun render(): dynamic = definedExternally
 }
 
 // FlatList Component
-external interface FlatListProps : RProps {
+external interface FlatListProps : Props {
     var renderItem: (arguments: dynamic) -> dynamic
     var data: Array<dynamic>
     var itemSeparatorComponent: dynamic
@@ -299,7 +301,7 @@ external interface FlatListProps : RProps {
     var viewabilityConfigCallbackPairs: dynamic
 }
 
-external class FlatList : Component<FlatListProps, RState> {
+external class FlatList : Component<FlatListProps, State> {
     override fun render(): dynamic = definedExternally
 
     companion object {
@@ -316,7 +318,7 @@ external class FlatList : Component<FlatListProps, RState> {
 }
 
 // ScrollView Component
-external interface ScrollViewProps : RProps {
+external interface ScrollViewProps : Props {
     var alwaysBounceHorizontal: Boolean
     var alwaysBounceVertical: Boolean
     var automaticallyAdjustContentInsets: Boolean
@@ -372,9 +374,10 @@ external interface ScrollViewProps : RProps {
     var snapToStart: Boolean
     var stickyHeaderIndices: Array<Int>
     var zoomScale: Int
+    var stickyHeaderHiddenOnScroll: Boolean
 }
 
-external class ScrollView : Component<ScrollViewProps, RState> {
+external class ScrollView : Component<ScrollViewProps, State> {
     override fun render(): dynamic = definedExternally
 
     companion object {
@@ -390,12 +393,12 @@ external interface SafeAreaViewProps : ViewProps {
     var emulateUnlessSupported: Boolean
 }
 
-external class SafeAreaView: Component<SafeAreaViewProps, RState> {
+external class SafeAreaView: Component<SafeAreaViewProps, State> {
     override fun render(): dynamic = definedExternally
 }
 
 // SectionList Component
-external interface SectionListProps : RProps {
+external interface SectionListProps : Props {
     var emulateUnlessSupported: Boolean
     var renderItem: (item: dynamic, index: Int, separators: dynamic) -> Unit
     var section: Array<dynamic>
@@ -424,7 +427,7 @@ external interface SectionListProps : RProps {
     var stickySectionHeadersEnabled: Boolean
 }
 
-external class SectionList: Component<SectionListProps, RState> {
+external class SectionList: Component<SectionListProps, State> {
     override fun render(): dynamic = definedExternally
 
     companion object {
@@ -435,14 +438,14 @@ external class SectionList: Component<SectionListProps, RState> {
 }
 
 // ActivityIndicator Component
-external interface ActivityIndicatorProps : RProps {
+external interface ActivityIndicatorProps : Props {
     var animating: Boolean
     var color: String
     var hidesWhenStopped: Boolean
     var size: dynamic
 }
 
-external class ActivityIndicator: Component<ActivityIndicatorProps, RState> {
+external class ActivityIndicator: Component<ActivityIndicatorProps, State> {
     override fun render(): dynamic = definedExternally
 }
 
@@ -459,7 +462,7 @@ external class StyleSheet {
     }
 }
 
-external interface KeyboardAvoidingViewProps : ViewProps, RProps {
+external interface KeyboardAvoidingViewProps : ViewProps, Props {
     var behavior: dynamic
     var contentContainerStyle: dynamic
     var enabled: Boolean
@@ -509,11 +512,11 @@ external interface KeyboardAvoidingViewProps : ViewProps, RProps {
 
 }
 
-external class KeyboardAvoidingView : Component<KeyboardAvoidingViewProps, RState> {
+external class KeyboardAvoidingView : Component<KeyboardAvoidingViewProps, State> {
     override fun render(): dynamic = definedExternally
 }
 
-external interface ModalProps : RProps {
+external interface ModalProps : Props {
     var animationType: dynamic
     var hardwareAccelerated: Boolean
     var onDismiss: () -> Unit
@@ -527,11 +530,11 @@ external interface ModalProps : RProps {
     var visible: Boolean
 }
 
-external class Modal : Component<ModalProps, RState> {
+external class Modal : Component<ModalProps, State> {
     override fun render(): dynamic = definedExternally
 }
 
-external interface PressableProps : RProps {
+external interface PressableProps : Props {
     var android_disableSound: Boolean
     var android_ripple: dynamic
     var children: dynamic
@@ -545,13 +548,15 @@ external interface PressableProps : RProps {
     var pressRetentionOffset: dynamic
     var style: dynamic
     var testOnly_pressed: Boolean
+    var onBlur: (event: dynamic) -> dynamic
+    var onFocus: (event: dynamic) -> dynamic
 }
 
-external class Pressable : Component<PressableProps, RState> {
+external class Pressable : Component<PressableProps, State> {
     override fun render(): dynamic = definedExternally
 }
 
-external interface RefreshControlProps : RProps {
+external interface RefreshControlProps : Props {
     var refreshing: Boolean
     var onRefresh: () -> Unit
     var colors: Array<dynamic>
@@ -564,11 +569,11 @@ external interface RefreshControlProps : RProps {
     var titleColor: dynamic
 }
 
-external class RefreshControl : Component<RefreshControlProps, RState> {
+external class RefreshControl : Component<RefreshControlProps, State> {
     override fun render(): dynamic = definedExternally
 }
 
-external interface StatusBarProps : RProps {
+external interface StatusBarProps : Props {
     var animated: Boolean
     var backgroundColor: dynamic
     var barStyle: dynamic
@@ -578,7 +583,7 @@ external interface StatusBarProps : RProps {
     var translucent: Boolean
 }
 
-external class StatusBar : Component<StatusBarProps, RState> {
+external class StatusBar : Component<StatusBarProps, State> {
     override fun render(): dynamic = definedExternally
 
     companion object {
@@ -593,7 +598,7 @@ external class StatusBar : Component<StatusBarProps, RState> {
     }
 }
 
-external interface TouchableHighlightProps : RProps {
+external interface TouchableHighlightProps : Props {
     var activeOpacity: Number
     var onHideUnderlay: () -> Unit
     var onShowUnderlay: () -> Unit
@@ -609,12 +614,12 @@ external interface TouchableHighlightProps : RProps {
     var onPress: () -> Unit
 }
 
-external class TouchableHighlight : Component<TouchableHighlightProps, RState> {
+external class TouchableHighlight : Component<TouchableHighlightProps, State> {
     override fun render(): dynamic = definedExternally
 
 }
 
-external interface TouchableOpacityProps : RProps {
+external interface TouchableOpacityProps : Props {
     var style: dynamic
     var onPress: () -> Unit
     var activeOpacity: Number
@@ -627,7 +632,7 @@ external interface TouchableOpacityProps : RProps {
     var nextFocusUp: Boolean
 }
 
-external class TouchableOpacity : Component<TouchableOpacityProps, RState> {
+external class TouchableOpacity : Component<TouchableOpacityProps, State> {
     override fun render(): dynamic = definedExternally
 
     companion object {
@@ -635,7 +640,7 @@ external class TouchableOpacity : Component<TouchableOpacityProps, RState> {
     }
 }
 
-external interface TouchableWithoutFeedbackProps : RProps {
+external interface TouchableWithoutFeedbackProps : Props {
     var accessibilityIgnoresInvertColors: Boolean
     var accessible: Boolean
     var accessibilityLabel: String
@@ -663,11 +668,11 @@ external interface TouchableWithoutFeedbackProps : RProps {
     var touchSoundDisabled: Boolean
 }
 
-external class TouchableWithoutFeedback : Component<TouchableWithoutFeedbackProps, RState> {
+external class TouchableWithoutFeedback : Component<TouchableWithoutFeedbackProps, State> {
     override fun render(): dynamic = definedExternally
 }
 
-external interface VirtualizedListProps : RProps {
+external interface VirtualizedListProps : Props {
     var renderItem: (arguments: dynamic) -> dynamic
     var data: dynamic
     var getItem: (data: dynamic, index: Number) -> dynamic
@@ -707,7 +712,7 @@ external interface VirtualizedListProps : RProps {
     var progressViewOffset: Number
 }
 
-external class VirtualizedList : Component<VirtualizedListProps, RState> {
+external class VirtualizedList : Component<VirtualizedListProps, State> {
     override fun render(): dynamic = definedExternally
 
     companion object {
@@ -726,7 +731,7 @@ external class VirtualizedList : Component<VirtualizedListProps, RState> {
     }
 }
 
-external interface DrawerLayoutAndroidProps : RProps {
+external interface DrawerLayoutAndroidProps : Props {
     var drawerBackgroundColor:  dynamic
     var drawerLockMode: dynamic
     var drawerPosition: dynamic
@@ -740,7 +745,7 @@ external interface DrawerLayoutAndroidProps : RProps {
     var statusBarBackgroundColor: dynamic
 }
 
-external class DrawerLayoutAndroid : Component<DrawerLayoutAndroidProps, RState> {
+external class DrawerLayoutAndroid : Component<DrawerLayoutAndroidProps, State> {
     override fun render(): dynamic = definedExternally
 
     companion object {
@@ -749,7 +754,7 @@ external class DrawerLayoutAndroid : Component<DrawerLayoutAndroidProps, RState>
     }
 }
 
-external interface TouchableNativeFeedbackProps : RProps {
+external interface TouchableNativeFeedbackProps : Props {
     var background: dynamic
     var useForeground: Boolean
     var hasTVPreferredFocus: Boolean
@@ -760,7 +765,7 @@ external interface TouchableNativeFeedbackProps : RProps {
     var nextFocusUp: Boolean
 }
 
-external class TouchableNativeFeedback : Component<TouchableNativeFeedbackProps, RState> {
+external class TouchableNativeFeedback : Component<TouchableNativeFeedbackProps, State> {
     override fun render(): dynamic = definedExternally
 
     companion object {
@@ -771,12 +776,12 @@ external class TouchableNativeFeedback : Component<TouchableNativeFeedbackProps,
     }
 }
 
-external interface InputAccessoryViewProps : RProps {
+external interface InputAccessoryViewProps : Props {
     var backgroundColor: dynamic
     var nativeID: String
     var style: dynamic
 }
 
-external class InputAccessoryView : Component<InputAccessoryViewProps, RState> {
+external class InputAccessoryView : Component<InputAccessoryViewProps, State> {
     override fun render(): dynamic = definedExternally
 }

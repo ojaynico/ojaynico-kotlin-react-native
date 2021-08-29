@@ -3,6 +3,8 @@ package ojaynico.kotlin.react
 import ojaynico.kotlin.react.native.*
 import react.RBuilder
 import react.RElementBuilder
+import react.ReactNode
+import react.createElement
 
 fun RBuilder.view(handler: RElementBuilder<ViewProps>.() -> Unit) = child(View::class) {
     handler()
@@ -13,12 +15,12 @@ fun RBuilder.animatedView(handler: RElementBuilder<ViewProps>.() -> Unit) = chil
 }
 
 fun RBuilder.text(text: String, handler: RElementBuilder<TextProps>.() -> Unit) = child(Text::class) {
-    this.childList.add(text)
+    this.childList.add(ReactNode(text))
     handler()
 }
 
 fun RBuilder.animatedText(text: String, handler: RElementBuilder<TextProps>.() -> Unit) = child(Animated.Text::class) {
-    this.childList.add(text)
+    this.childList.add(ReactNode(text))
     handler()
 }
 
