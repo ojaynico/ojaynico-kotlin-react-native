@@ -1,12 +1,12 @@
 plugins {
-    kotlin("js") version "1.5.30"
+    kotlin("js") version "1.5.31"
     id("maven-publish")
     id("io.codearte.nexus-staging") version "0.30.0"
     signing
 }
 
 group = "com.github.ojaynico"
-version = "1.1.5"
+version = "1.1.6"
 
 val artifactName = project.name
 val artifactGroup = project.group.toString()
@@ -41,8 +41,8 @@ kotlin {
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlin-wrappers:kotlin-react:17.0.2-pre.236-kotlin-1.5.30")
-    implementation("org.jetbrains.kotlin-wrappers:kotlin-extensions:1.0.1-pre.236-kotlin-1.5.30")
+    implementation("org.jetbrains.kotlin-wrappers:kotlin-react:17.0.2-pre.247-kotlin-1.5.31")
+    implementation("org.jetbrains.kotlin-wrappers:kotlin-extensions:1.0.1-pre.247-kotlin-1.5.31")
     implementation(npm("react", "17.0.2"))
     implementation(npm("react-native", "0.65.1"))
 }
