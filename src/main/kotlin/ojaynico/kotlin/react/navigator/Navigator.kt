@@ -27,7 +27,7 @@ fun buildSceneConfig(children: Array<Json>): Json {
         }
     }
 
-    return config as Json
+    return config.unsafeCast<Json>()
 }
 
 external interface NavigatorFunctions {
@@ -49,7 +49,12 @@ external interface NavigatorState : State {
 class Navigator : RComponent<Props, NavigatorState>() {
 
     var backAction = {
-        handlePop()
+        if (state.stack.size == 1) {
+            BackHandler.exitApp()
+        } else {
+            handlePop()
+        }
+
         true
     }
 
@@ -57,7 +62,7 @@ class Navigator : RComponent<Props, NavigatorState>() {
         val initialSceneName: String = props.asDynamic().children[0].props.name
         setState {
             sceneConfig = buildSceneConfig(props.asDynamic().children)
-            stack = listOf(sceneConfig[initialSceneName] as Json)
+            stack = listOf(sceneConfig[initialSceneName].unsafeCast<Json>())
         }
 
         BackHandler.addEventListener(
@@ -77,7 +82,7 @@ class Navigator : RComponent<Props, NavigatorState>() {
 
     val handlePush = { sceneName: String ->
         setState({ navigatorState ->
-            navigatorState.stack = state.stack + listOf(state.sceneConfig[sceneName] as Json)
+            navigatorState.stack = state.stack + listOf(state.sceneConfig[sceneName].unsafeCast<Json>())
             navigatorState
         }, {
             _animatedValue.setValue(width)
@@ -134,7 +139,7 @@ class Navigator : RComponent<Props, NavigatorState>() {
                     animatedView {
                         this.attrs.asDynamic().key = json["key"].toString()
                         this.attrs.style = sceneStyles
-                        child(json.asDynamic().component as FunctionComponent<NavigationProps>) {
+                        child(json.asDynamic().component.unsafeCast<FunctionComponent<NavigationProps>>()) {
                             attrs {
                                 navigator = object : NavigatorFunctions {
                                     override var pop = handlePop
