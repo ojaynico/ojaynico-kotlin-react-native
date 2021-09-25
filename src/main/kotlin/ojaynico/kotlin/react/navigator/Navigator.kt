@@ -30,8 +30,13 @@ fun buildSceneConfig(children: Array<Json>): Json {
     return config as Json
 }
 
+external interface NavigatorFunctions {
+    var pop: () -> Unit
+    var push: (routeName: String) -> Unit
+}
+
 external interface NavigationProps : Props {
-    var navigator: dynamic
+    var navigator: NavigatorFunctions
 }
 
 val width = Dimensions.get("window").width
@@ -130,10 +135,10 @@ class Navigator : RComponent<Props, NavigatorState>() {
                         this.attrs.asDynamic().key = json["key"].toString()
                         this.attrs.style = sceneStyles
                         child(json.asDynamic().component as FunctionComponent<NavigationProps>) {
-                            this.attrs {
-                                navigator = json {
-                                    push = handlePush
-                                    pop = handlePop
+                            attrs {
+                                navigator = object : NavigatorFunctions {
+                                    override var pop = handlePop
+                                    override var push = handlePush
                                 }
                             }
                         }
