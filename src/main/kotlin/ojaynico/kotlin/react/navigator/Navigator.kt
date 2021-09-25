@@ -3,6 +3,7 @@ package ojaynico.kotlin.react.navigator
 import ojaynico.kotlin.react.animatedView
 import ojaynico.kotlin.react.json
 import ojaynico.kotlin.react.native.Animated
+import ojaynico.kotlin.react.native.BackHandler
 import ojaynico.kotlin.react.native.Dimensions
 import ojaynico.kotlin.react.native.StyleSheet
 import ojaynico.kotlin.react.view
@@ -42,12 +43,29 @@ external interface NavigatorState : State {
 
 class Navigator : RComponent<Props, NavigatorState>() {
 
+    var backAction = {
+        handlePop()
+        true
+    }
+
     override fun componentDidMount() {
         val initialSceneName: String = props.asDynamic().children[0].props.name
         setState {
             sceneConfig = buildSceneConfig(props.asDynamic().children)
             stack = listOf(sceneConfig[initialSceneName] as Json)
         }
+
+        BackHandler.addEventListener(
+            "hardwareBackPress",
+            this.backAction
+        )
+    }
+
+    override fun componentWillUnmount() {
+        BackHandler.removeEventListener(
+            "hardwareBackPress",
+            this.backAction
+        )
     }
 
     val _animatedValue = Animated.Value(0)
