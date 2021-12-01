@@ -1,20 +1,18 @@
 package ojaynico.kotlin.react.navigator
 
 import kotlinext.js.getOwnPropertyNames
+import kotlinx.browser.window
 import ojaynico.kotlin.react.animatedView
 import ojaynico.kotlin.react.json
-import ojaynico.kotlin.react.native.Animated
-import ojaynico.kotlin.react.native.BackHandler
-import ojaynico.kotlin.react.native.Dimensions
-import ojaynico.kotlin.react.native.StyleSheet
+import ojaynico.kotlin.react.native.*
 import ojaynico.kotlin.react.view
 import react.*
 import kotlin.js.Json
 
-
 external interface RouteProps : Props {
     var name: String
     var component: dynamic
+    var pathVariables: String
 }
 
 val Route = functionComponent<RouteProps> { }
@@ -26,6 +24,7 @@ fun buildSceneConfig(children: Array<Json>, sideMenu: FunctionComponent<*>): Jso
         config[child.asDynamic().props.name] = json {
             key = child.asDynamic().props.name
             component = child.asDynamic().props.component
+            pathVariables = child.asDynamic().props.pathVariables
         }
     }
 
@@ -53,37 +52,53 @@ external interface NavigationProps : Props {
 val screenWidth = Dimensions.get("window").width
 
 external interface NavigatorState : State {
+    var initialSceneName: String
     var stack: List<Json>
     var sceneConfig: Json
     var showSideMenu: Boolean
     var touchX: dynamic
+    var browserHistory: List<String>
 }
 
 external interface NavigatorProps : Props {
-    var sideMenu: FunctionComponent<*>
+    var sideMenu: FC<*>
     var menuPosition: String
     var disableMenuGesture: Boolean
 }
 
 class Navigator : RComponent<NavigatorProps, NavigatorState>() {
 
-    var backAction = {
-        if (state.stack.size == 1 && !state.showSideMenu) {
-            BackHandler.exitApp()
-        } else {
-            handlePop()
-        }
-
-        true
-    }
-
     override fun componentDidMount() {
-        val initialSceneName: String = props.asDynamic().children[0].props.name
         setState {
+
+            if (Platform.OS == "web" && !window.location.href.contains("/#/")) {
+                window.history.pushState("", "", "/#/")
+            }
+
+            initialSceneName = if (Platform.OS == "web" && getSceneNameFromUrl().isNotEmpty()) getSceneNameFromUrl() else props.asDynamic().children[0].props.name
             sceneConfig = buildSceneConfig(props.asDynamic().children, props.sideMenu)
+
+            if (Platform.OS == "web") {
+                browserHistory = listOf(initialSceneName)
+                val pathVariables = sceneConfig[initialSceneName].unsafeCast<Json>()["pathVariables"]
+
+                if (pathVariables != undefined) {
+                    sceneConfig[initialSceneName].unsafeCast<Json>()["props"] = getSceneProps(initialSceneName,
+                        pathVariables as String
+                    )
+                }
+            }
+
             stack = listOf(sceneConfig[initialSceneName].unsafeCast<Json>())
             showSideMenu = false
         }
+
+        if (Platform.OS == "web") {
+            window.onhashchange = { hashChangeEvent ->
+                onBrowserHashChange()
+            }
+        }
+
         BackHandler.addEventListener(
             "hardwareBackPress",
             this.backAction
@@ -95,6 +110,33 @@ class Navigator : RComponent<NavigatorProps, NavigatorState>() {
             "hardwareBackPress",
             this.backAction
         )
+    }
+
+    private fun onBrowserHashChange() {
+        window.location.reload()
+        /*setState {
+            val sceneName: String = getSceneNameFromUrl().ifEmpty { props.asDynamic().children[0].props.name as String }
+
+            val pathVariables = sceneConfig[sceneName].unsafeCast<Json>()["pathVariables"]
+
+            if (state.browserHistory.last() == sceneName) {
+                handlePop()
+            } else {
+                handlePush(sceneName, getSceneProps(sceneName,
+                    pathVariables as String
+                ))
+            }
+        }*/
+    }
+
+    val backAction = {
+        if (state.stack.size == 1 && !state.showSideMenu) {
+            BackHandler.exitApp()
+        } else {
+            handlePop()
+        }
+
+        true
     }
 
     private fun onSwipeLeft() {
@@ -117,6 +159,55 @@ class Navigator : RComponent<NavigatorProps, NavigatorState>() {
         }
     }
 
+    private fun changeUrl(data: String, sceneName: String) {
+        if (sceneName == "krnMenu") {
+            return
+        }
+
+        if (Platform.OS == "web") {
+            if (state.initialSceneName == sceneName) {
+                if (data.isNotEmpty())
+                    window.history.pushState("", "", "/#$data")
+                else
+                    window.history.pushState("", "", "/#/")
+            } else {
+                if (data.isNotEmpty())
+                    window.history.pushState("", "", "/#/$sceneName$data")
+                else
+                    window.history.pushState("", "", "/#/$sceneName")
+            }
+        }
+
+        /*val path = if (state.initialSceneName == sceneName) window.location.protocol + "://" + window.location.host + "/#/"
+        else
+            window.location.protocol + "://" + window.location.host + "/#/" + sceneName + "/"
+
+        val filterParam = window.location.href.substring(path.length - 1)
+        return filterParam.split("/")*/
+    }
+
+    private fun getSceneNameFromUrl(): String {
+        val href = window.location.href
+        return href.substringAfter("/#/").substringBefore("/")
+    }
+
+    private fun getSceneProps(sceneName: String, pathVariables: String): dynamic {
+        val path = if (sceneName.isEmpty()) window.location.protocol + "://" + window.location.host + "/#/"
+        else
+            window.location.protocol + "://" + window.location.host + "/#/" + sceneName + "/"
+
+        val filterParam = window.location.href.substring(path.length - 1)
+        val values = filterParam.split("/")
+        val variables = pathVariables.split("/")
+        val urlProps = json {  }
+
+        variables.forEachIndexed { index, s ->
+            urlProps[s] = values[index]
+        }
+
+        return urlProps
+    }
+
     val _animatedValue = Animated.Value(0)
 
     val handlePush = { sceneName: String, childProps: dynamic ->
@@ -124,8 +215,26 @@ class Navigator : RComponent<NavigatorProps, NavigatorState>() {
             showSideMenu = sceneName == "krnMenu"
         }
 
+        if (childProps != undefined && childProps != "") {
+            var propsParams = ""
+            val props = childProps.unsafeCast<JSON>()
+            val childPropsNames = props.getOwnPropertyNames()
+
+            for (propName in childPropsNames) {
+                propsParams += "/" + childProps[propName]
+            }
+
+            changeUrl(propsParams, sceneName)
+        }
+
+
         setState({ navigatorState ->
             state.sceneConfig[sceneName].unsafeCast<Json>()["props"] = childProps
+
+            if (Platform.OS == "web") {
+                navigatorState.browserHistory = state.browserHistory + listOf(sceneName)
+            }
+
             navigatorState.stack =
                 if (state.stack.last()["key"].toString() == "krnMenu") {
                     state.stack.slice(0 until state.stack.size - 1) + listOf(state.sceneConfig[sceneName].unsafeCast<Json>())
@@ -179,6 +288,14 @@ class Navigator : RComponent<NavigatorProps, NavigatorState>() {
             if (state.stack.size > 1) {
                 setState {
                     stack = stack.slice(0 until stack.size - 1)
+
+                    if (Platform.OS == "web") {
+                        browserHistory = browserHistory.slice(0 until browserHistory.size - 1)
+                    }
+                }
+
+                if (Platform.OS == "web") {
+                    window.history.back()
                 }
             }
         }
@@ -241,12 +358,11 @@ class Navigator : RComponent<NavigatorProps, NavigatorState>() {
                         this.attrs.asDynamic().key = json["key"].toString()
                         this.attrs.style = sceneStyles
                         child(json.asDynamic().component.unsafeCast<FunctionComponent<Props>>()) {
-
                             if (json["props"] != undefined) {
                                 val childProps = json["props"].unsafeCast<JSON>()
                                 val childPropsNames = childProps.getOwnPropertyNames()
                                 for (propName in childPropsNames) {
-                                    this.attrs.asDynamic()[propName] = json["props"].asDynamic()[propName]
+                                    this.attrs.asDynamic()[propName] = window.asDynamic().decodeURI(json["props"].asDynamic()[propName])
                                 }
                             }
 

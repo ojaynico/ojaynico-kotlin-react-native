@@ -1,12 +1,12 @@
 plugins {
-    kotlin("js") version "1.5.31"
+    kotlin("js") version "1.6.0"
     id("maven-publish")
     id("io.codearte.nexus-staging") version "0.30.0"
     signing
 }
 
 group = "com.github.ojaynico"
-version = "1.1.6"
+version = "1.1.7"
 
 val artifactName = project.name
 val artifactGroup = project.group.toString()
@@ -41,10 +41,10 @@ kotlin {
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlin-wrappers:kotlin-react:17.0.2-pre.247-kotlin-1.5.31")
-    implementation("org.jetbrains.kotlin-wrappers:kotlin-extensions:1.0.1-pre.247-kotlin-1.5.31")
+    implementation("org.jetbrains.kotlin-wrappers:kotlin-react:17.0.2-pre.274-kotlin-1.6.0")
+    implementation("org.jetbrains.kotlin-wrappers:kotlin-extensions:1.0.1-pre.274-kotlin-1.6.0")
     implementation(npm("react", "17.0.2"))
-    implementation(npm("react-native", "0.65.1"))
+    implementation(npm("react-native", "0.66"))
 }
 
 val sourcesJar by tasks.registering(Jar::class) {
@@ -111,4 +111,12 @@ nexusStaging {
 signing {
     sign(tasks["sourcesJar"])
     sign(publishing.publications["ojaynico-kotlin-react-native"])
+}
+
+rootProject.plugins.withType<org.jetbrains.kotlin.gradle.targets.js.yarn.YarnPlugin> {
+    rootProject.the<org.jetbrains.kotlin.gradle.targets.js.yarn.YarnRootExtension>().download = false // or true for default behavior
+}
+
+rootProject.plugins.withType<org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootPlugin> {
+    rootProject.the<org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootExtension>().download = false // or true for default behavior
 }
