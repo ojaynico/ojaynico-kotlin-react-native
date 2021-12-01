@@ -130,8 +130,9 @@ val App = functionComponent<Props> {
     navigator {
         this.attrs {
             // Side Menu (from above) is passed as functional component prop
-            sideMenu = Menu
-            menuPosition = "left"
+            // Using asDynamic() for now till the next update
+            asDynamic().sideMenu = Menu
+            asDynamic().menuPosition = "left"
         }
         route {
             this.attrs {
