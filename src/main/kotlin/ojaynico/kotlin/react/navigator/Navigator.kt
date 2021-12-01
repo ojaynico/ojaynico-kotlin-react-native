@@ -15,9 +15,9 @@ external interface RouteProps : Props {
     var pathVariables: String
 }
 
-val Route = functionComponent<RouteProps> { }
+val Route = fc<RouteProps> { }
 
-fun buildSceneConfig(children: Array<Json>, sideMenu: FunctionComponent<*>): Json {
+fun buildSceneConfig(children: Array<Json>, sideMenu: FC<*>): Json {
     val config = json { }
 
     children.forEach { child ->
@@ -357,7 +357,7 @@ class Navigator : RComponent<NavigatorProps, NavigatorState>() {
                     animatedView {
                         this.attrs.asDynamic().key = json["key"].toString()
                         this.attrs.style = sceneStyles
-                        child(json.asDynamic().component.unsafeCast<FunctionComponent<Props>>()) {
+                        child(json.asDynamic().component.unsafeCast<FC<Props>>()) {
                             if (json["props"] != undefined) {
                                 val childProps = json["props"].unsafeCast<JSON>()
                                 val childPropsNames = childProps.getOwnPropertyNames()

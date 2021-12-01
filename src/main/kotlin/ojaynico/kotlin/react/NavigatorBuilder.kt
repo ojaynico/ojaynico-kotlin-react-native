@@ -1,13 +1,13 @@
 package ojaynico.kotlin.react
 
 import ojaynico.kotlin.react.navigator.Navigator
+import ojaynico.kotlin.react.navigator.NavigatorProps
 import ojaynico.kotlin.react.navigator.Route
 import ojaynico.kotlin.react.navigator.RouteProps
-import react.Props
 import react.RBuilder
 import react.RElementBuilder
 
-fun RBuilder.navigator(handler: RElementBuilder<Props>.() -> Unit) = child(Navigator::class) {
+fun RBuilder.navigator(handler: RElementBuilder<NavigatorProps>.() -> Unit) = child(Navigator::class) {
     handler()
 }
 
