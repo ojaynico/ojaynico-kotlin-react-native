@@ -1,12 +1,9 @@
 package ojaynico.kotlin.react
 
 import ojaynico.kotlin.react.native.*
-import react.RBuilder
-import react.RElementBuilder
 import react.ReactNode
-import react.createElement
 
-fun RBuilder.view(handler: RElementBuilder<ViewProps>.() -> Unit) = child(View::class) {
+/*fun RBuilder.view(handler: RElementBuilder<ViewProps>.() -> Unit) = child(View::class) {
     handler()
 }
 
@@ -126,6 +123,6 @@ fun RBuilder.touchableNativeFeedback(handler: TouchableNativeFeedbackProps.() ->
 
 fun RBuilder.inputAccessoryView(handler: InputAccessoryViewProps.() -> Unit) = child(InputAccessoryView::class) {
     attrs(handler)
-}
+}*/
 
 typealias ComponentProvider = () -> dynamic

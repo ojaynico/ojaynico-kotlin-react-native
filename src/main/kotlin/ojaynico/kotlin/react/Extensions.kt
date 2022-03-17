@@ -2,7 +2,7 @@
 
 package ojaynico.kotlin.react
 
-import ojaynico.kotlin.react.native.AppRegistry
+import ojaynico.kotlin.react.native.api.AppRegistry
 import react.Component
 
 // Components

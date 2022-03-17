@@ -1,10 +1,12 @@
 @file:JsModule("react-native")
 @file:Suppress("unused")
 
-package ojaynico.kotlin.react.native
+package ojaynico.kotlin.react.native.api
 
 import ojaynico.kotlin.react.ComponentProvider
+import ojaynico.kotlin.react.native.component.*
 import react.Component
+import react.FC
 import react.Props
 import react.State
 import kotlin.js.Promise
@@ -23,6 +25,8 @@ external class Alert: Component<Props, State> {
         )
     }
 }
+
+external val AnimatedView : FC<ViewProps>
 
 external class Animated : Component<Props, State> {
 
@@ -329,4 +333,87 @@ external object AccessibilityInfo {
     fun getRecommendedTimeoutMillis(originalTimeout: Number): Promise<Number>
     fun addEventListener(eventName: String, handler: (args: dynamic) -> Unit): dynamic
     fun removeEventListener(eventName: String, handler: (args: dynamic) -> Unit)
+}
+
+external object Image {
+    fun getSize(uri: String, success: () -> Unit, failure: () -> Unit): dynamic
+    fun getSizeWithHeaders(uri: String, headers: dynamic, success: () -> Unit, failure: () -> Unit): dynamic
+    fun prefetch(uri: String): dynamic
+    fun abortPrefetch(requestId: Number): dynamic
+    fun queryCache(vararg urls: String): dynamic
+    fun resolveAssetSource(source: dynamic): dynamic
+}
+
+external object TextInput {
+    fun focus()
+    fun blur()
+    fun clear()
+    fun isFocused(): dynamic
+}
+
+external object FlatList {
+    fun scrollToEnd(params: dynamic)
+    fun scrollToIndex(params: dynamic)
+    fun scrollToItem(params: dynamic)
+    fun scrollToOffset(params: dynamic)
+    fun recordInteraction()
+    fun flashScrollIndicators()
+    fun getNativeScrollRef()
+    fun getScrollResponder()
+    fun getScrollableNode()
+}
+
+external object ScrollView {
+    fun flashScrollIndicators()
+    fun scrollTo(vararg options: dynamic)
+    fun scrollToEnd(vararg options: dynamic)
+    fun scrollWithoutAnimationTo(y: dynamic, x: dynamic)
+}
+
+external object SectionList {
+    fun scrollToLocation(params: dynamic)
+    fun recordInteraction()
+    fun flashScrollIndicators()
+}
+
+external object StatusBar {
+    fun popStackEntry(entry: dynamic): dynamic
+    fun pushStackEntry(entry: dynamic): dynamic
+    fun replaceStackEntry(entry: dynamic, props: dynamic): dynamic
+    fun setBackgroundColor(color: String, animated: Boolean)
+    fun setBarStyle(style: dynamic, animated: Boolean)
+    fun setHidden(hidden: Boolean, animation: dynamic)
+    fun setNetworkActivityIndicatorVisible(visible: Boolean)
+    fun setTranslucent(translucent: Boolean)
+}
+
+external object TouchableOpacity {
+    fun setOpacityTo(value: Number, duration: Number)
+}
+
+external object VirtualizedList {
+    fun scrollToEnd(params: dynamic)
+    fun scrollToIndex(params: dynamic)
+    fun scrollToItem(params: dynamic)
+    fun scrollToOffset(params: dynamic)
+    fun recordInteraction()
+    fun flashScrollIndicators()
+    fun getScrollRef()
+    fun getScrollResponder()
+    fun getScrollableNode()
+    fun setNativeProps(params: dynamic)
+    fun getChildContext() : dynamic
+    fun hasMore(): Boolean
+}
+
+external object DrawerLayoutAndroid {
+    fun closeDrawer()
+    fun openDrawer()
+}
+
+external object TouchableNativeFeedback {
+    fun SelectableBackground(rippleRadius: Number)
+    fun SelectableBackgroundBorderless(rippleRadius: Number)
+    fun Ripple(color: String, borderless: Boolean, rippleRadius: Number)
+    fun canUseNativeForeground()
 }

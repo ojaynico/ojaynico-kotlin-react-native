@@ -1,6 +1,6 @@
 # ojaynico-kotlin-react-native
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.ojaynico/ojaynico-kotlin-react-native/badge.svg)](https://search.maven.org/artifact/com.github.ojaynico/ojaynico-kotlin-react-native/1.1.7/pom)
-[![Kotlin](https://img.shields.io/badge/kotlin-1.6.0-blue.svg?logo=kotlin)](http://kotlinlang.org)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.ojaynico/ojaynico-kotlin-react-native/badge.svg)](https://search.maven.org/artifact/com.github.ojaynico/ojaynico-kotlin-react-native/1.1.9/pom)
+[![Kotlin](https://img.shields.io/badge/kotlin-1.6.10-blue.svg?logo=kotlin)](http://kotlinlang.org)
 [![npm version](https://img.shields.io/npm/v/react.svg?style=flat)](https://www.npmjs.com/package/react)
 [![npm version](https://img.shields.io/npm/v/react-native?color=brightgreen&label=npm%20package)](https://www.npmjs.com/package/react-native)
 [![Kotlin JS IR supported](https://img.shields.io/badge/Kotlin%2FJS-IR%20supported-yellow)](https://kotl.in/jsirsupported)
@@ -32,16 +32,21 @@ repositories {
 }
 
 dependencies {
-    implementation("com.github.ojaynico:ojaynico-kotlin-react-native:1.1.7")
+    implementation("com.github.ojaynico:ojaynico-kotlin-react-native:1.1.9")
 }
 ```
 
 ### `Example of a react native app using the above wrapper`
 
 ```kotlin
-import ojaynico.kotlin.react.*
-import ojaynico.kotlin.react.native.AppRegistry
-import react.*
+import ojaynico.kotlin.react.native.api.AppRegistry
+import ojaynico.kotlin.react.native.api.Platform
+import ojaynico.kotlin.react.native.component.ScrollView
+import ojaynico.kotlin.react.native.component.StyleSheet
+import ojaynico.kotlin.react.native.component.Text
+import ojaynico.kotlin.react.native.component.View
+import react.FC
+import react.Props
 
 val styles = StyleSheet.create(object {
     val body = object {
@@ -52,19 +57,18 @@ val styles = StyleSheet.create(object {
             val fontWeight = "600"
             val color = "#000"
     }
-}
+})
 
-class App : RComponent<Props, State>() {
-    override fun RBuilder.render() {
-        scrollView {
-            attrs.contentInsetAdjustmentBehavior = "automatic"
-            
-            view {
-                attrs.style = styles.body
+val App = FC<Props> {
+    ScrollView {
+        contentInsetAdjustmentBehavior = "automatic"
 
-                text("Welcome to Kotlin React Native") {
-                    style = styles.text
-                }
+        View {
+            style = styles.body
+
+            Text {
+                style = styles.text
+                +"Welcome to Kotlin React Native"
             }
         }
     }
@@ -72,9 +76,9 @@ class App : RComponent<Props, State>() {
 
 fun main() {
     // For class components
-    AppRegistry.registerComponent("MyApp") { App::class.js }
+    //AppRegistry.registerComponent("MyApp") { App::class.js }
     // For functional components (Assume App is the functional component)
-    // AppRegistry.registerComponent("MyApp") { App }
+     AppRegistry.registerComponent("MyApp") { App }
 
     // Code below will work if you have added react native web dependency to your project. 
     // Visit how to set up react native web in your project for a detailed instruction.
@@ -87,6 +91,7 @@ fun main() {
 }
 ```
 
+## `NOTE: STILL UNDER DEVELOPMENT. USE ALTERNATIVE NAVIGATION`
 ### `Example using Navigation`
 
 ```kotlin
