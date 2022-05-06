@@ -1,14 +1,14 @@
 import org.jetbrains.kotlin.gradle.plugin.statistics.ReportStatisticsToElasticSearch.password
 
 plugins {
-    kotlin("js") version "1.6.10"
+    kotlin("js") version "1.6.20"
     id("maven-publish")
     id("io.codearte.nexus-staging") version "0.30.0"
     signing
 }
 
 group = "com.github.ojaynico"
-version = "1.1.9"
+version = "1.2.0"
 
 val artifactName = project.name
 val artifactGroup = project.group.toString()
@@ -42,10 +42,10 @@ kotlin {
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlin-wrappers:kotlin-react:17.0.2-pre.294-kotlin-1.6.10")
-    implementation("org.jetbrains.kotlin-wrappers:kotlin-extensions:1.0.1-pre.294-kotlin-1.6.10")
-    implementation(npm("react", "17.0.2"))
-    implementation(npm("react-native", "0.67.2"))
+    implementation("org.jetbrains.kotlin-wrappers:kotlin-react:18.1.0-pre.333")
+    implementation("org.jetbrains.kotlin-wrappers:kotlin-extensions:1.0.1-pre.333")
+    implementation(npm("react", "18.1.0"))
+    implementation(npm("react-native", "0.68.1"))
 }
 
 val sourcesJar by tasks.registering(Jar::class) {
@@ -120,4 +120,10 @@ rootProject.plugins.withType<org.jetbrains.kotlin.gradle.targets.js.yarn.YarnPlu
 
 rootProject.plugins.withType<org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootPlugin> {
     rootProject.the<org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootExtension>().download = false // or true for default behavior
+}
+
+allprojects {
+    tasks.withType<org.jetbrains.kotlin.gradle.targets.js.npm.tasks.KotlinNpmInstallTask> {
+        args += "--ignore-engines"
+    }
 }
