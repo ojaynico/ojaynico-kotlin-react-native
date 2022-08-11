@@ -1,14 +1,12 @@
-import org.jetbrains.kotlin.gradle.plugin.statistics.ReportStatisticsToElasticSearch.password
-
 plugins {
-    kotlin("js") version "1.6.20"
+    kotlin("js") version "1.7.10"
     id("maven-publish")
     id("io.codearte.nexus-staging") version "0.30.0"
     signing
 }
 
 group = "com.github.ojaynico"
-version = "1.2.0"
+version = "1.2.1"
 
 val artifactName = project.name
 val artifactGroup = project.group.toString()
@@ -42,10 +40,10 @@ kotlin {
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlin-wrappers:kotlin-react:18.1.0-pre.333")
-    implementation("org.jetbrains.kotlin-wrappers:kotlin-extensions:1.0.1-pre.333")
-    implementation(npm("react", "18.1.0"))
-    implementation(npm("react-native", "0.68.1"))
+    implementation("org.jetbrains.kotlin-wrappers:kotlin-react:18.2.0-pre.360")
+    implementation("org.jetbrains.kotlin-wrappers:kotlin-extensions:1.0.1-pre.360")
+    implementation(npm("react", "18.2.0"))
+    implementation(npm("react-native", "0.69.3"))
 }
 
 val sourcesJar by tasks.registering(Jar::class) {
